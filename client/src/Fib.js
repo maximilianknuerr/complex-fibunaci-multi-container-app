@@ -1,7 +1,7 @@
-import React, { Compoent } from 'react'
+import React, { Component } from 'react'
 import axios from 'axios'
 
-class Fib extends Compoent {
+class Fib extends Component {
     state = {
         seenIndexes: [],
         values: {},
@@ -55,7 +55,7 @@ class Fib extends Compoent {
 
 
     render() {
-        return
+        return(
             <div>
                 <form onSubmit={this.handleSubmit}>
                     <label>Enter your index:</label>
@@ -72,6 +72,8 @@ class Fib extends Compoent {
                 <h3>Calculated Values:</h3>
                 {this.renderValues()}
             </div>
+        )
+            
     }
 }
 
