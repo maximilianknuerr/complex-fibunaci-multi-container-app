@@ -3,19 +3,32 @@ const redis = require('redis')
 
 
 const redisClient = redis.createClient({
-    host: keys.redisHost,
-    port: keys.redisPort,
+    url: 'redis://redis:6379',
     retry_strategy: () => 1000
 })
 
 const sub = redisClient.duplicate()
 
+redisClient.connect().then(() => {
+    console.log("redis is connected")
+})
+
+sub.connect().then(() => {
+    console.log("sub redis is connected")
+})
+
+
+
+
 function fib(index) {
     if (index < 2) return 1
-    else return fib(index - 1) + fib(index - 2)
+    return fib(index - 1) + fib(index - 2)
 }
 
-sub.on('message', (channel, message) => {
-    redisClient.hset('values', message, fib(parseInt(message)))
+sub.subscribe('insert', async (message) => {
+    console.log(message)
+    console.log(fib(parseInt(message)))
+    redisClient.hSet('valuesisis', message, fib(parseInt(message))).then(() => {
+        console.log("worker inserted fib")
+    })
 })
-sub.subscribe('insert')
