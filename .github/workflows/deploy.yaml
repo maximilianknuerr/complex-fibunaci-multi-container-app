@@ -35,5 +35,5 @@ jobs:
                 environment_name: Multidocker-env
                 existing_bucket_name: elasticbeanstalk-us-east-1-527551791404
                 region: us-east-1
-                version_label: "docker-app-${{ steps.format-time.outputs.replaced }}"
+                version_label: "docker-app-${{ github.sha }}"
                 deployment_package: deploy.zip
