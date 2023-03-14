@@ -26,7 +26,7 @@ jobs:
             - name: Generate deployment package
               run: zip -r deploy.zip . -x '*.git*'
 
-            - name: Beanstalk Deploy
+            - name: Deploy to EB
               uses: einaregilsson/beanstalk-deploy@v21
               with:
                 aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
