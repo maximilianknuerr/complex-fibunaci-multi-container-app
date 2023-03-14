@@ -1,0 +1,37 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [
+        {
+            "name": "client",
+            "image": "maximilianknuerr/complex-fib",
+            "hostname": "client",
+            "essential": false
+        },
+        {
+            "name": "server",
+            "image": "maximilianknuerr/multi-server-10-14",
+            "hostname": "api",
+            "essential": false
+        },
+        {
+            "name": "worker",
+            "image": "maximilianknuerr/multi-worker-10-14",
+            "hostname": "worker",
+            "essential": false
+        },
+        {
+            "name": "nginx",
+            "image": "maximilianknuerr/multi-nginx-10-14",
+            "hostname": "nginx",
+            "essential": true,
+            "portMappings": [
+                {
+                    "hostPort": 80,
+                    "containerPort": 80,
+
+                }
+            ],
+            "links": ["client", "server"]
+        }
+    ]
+}
